@@ -103,7 +103,7 @@ function Triangle(a, b, c) { // 三角形 的 构造函数 , 需要三个点来�
 	}
 };
 
-Triangle.prototype = s; //继承了 多边形的所有属性与方法。
+Triangle.prototype = s; //继承了 多边形的所有属性与方法。 这里用的是 指引赋值，即 s 的后续变化依然可以影响到 子元素的继承。  如果使用深拷贝，则可以避免。
 Triangle.prototype.constructor = Triangle; //绑定 constructor 到自身
 
 var p1 = new Point(100, 100);
@@ -117,7 +117,7 @@ console.log(t)
 console.log(t.getLines())
 console.log(t.getLines())
 console.log(t)
-
+Polygon.prototype.id = '123';  //在这里给 Polygon 添加属性，还可以传递到已经定义的子元素。
 var p4 = new Point(0, 0);
 var p5 = new Point(460, 120);
 var p6 = new Point(320, 100);
@@ -125,3 +125,5 @@ var s = new Triangle(p4,p5,p6);
 s.draw();
 console.log(s)
 console.log(s.getLines())
+console.log(s.id)
+console.log(t.id)
