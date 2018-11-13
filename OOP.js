@@ -29,10 +29,8 @@ function Line(p1, p2) {
 }
 
 // 多边形的构造函数  抽象类
-// 多边形 有 点的集合，显得集合 ，将多边形绑定到 DOM
+// 多边形 有 点的集合，线的集合 ，将多边形绑定到 DOM
 function Polygon() {
-	this.points = [];
-	this.lines = [];
 	this.init();
 }
 
@@ -57,7 +55,7 @@ Polygon.prototype = {
 		ctx.stroke();
 	},
 	getColors: function () {  //获取 绘制颜色，这里采用rgb颜色，随机颜色
-		if (this.color) {
+		if (typeof this.color !== 'undefined') {
 			return this.color
 		}
 		this.color = [];
@@ -71,14 +69,16 @@ Polygon.prototype = {
 		return this.points
 	},
 	getLines: function () {  // 获取多边形的边
-		if (this.lines.length > 0) {
+		if(typeof this.lines !== 'undefined'){
 			return this.lines
 		}
-
+		var lines = [];
 		for (var i = 0; i < this.points.length; i++) {
-			this.lines[i] = new Line(this.points[i], (this.points[i + 1]) ? this.points[i + 1] : this.points[0])
+			lines[i] = new Line(this.points[i], (this.points[i + 1]) ? this.points[i + 1] : this.points[0])
 		}
+		console.log(1)
 
+		this.lines = lines;
 		return this.lines
 	},
 	getPerimeter: function () {	// 获取周长
@@ -95,11 +95,9 @@ Polygon.prototype = {
 }
 
 var s = new Polygon();
-console.log(s)
 
 function Triangle(a, b, c) { // 三角形 的 构造函数 , 需要三个点来绘制三角形
 	this.points = [a, b, c]; //点的集合，所有绘制基于 点的集合完成
-
 	this.getArea = function () { //三角形的面积公式，可以根据海伦公式求得。
 
 	}
@@ -115,7 +113,15 @@ var p3 = new Point(300, 300);
 var t = new Triangle(p1, p2, p3);
 
 t.draw();
+console.log(t)
+console.log(t.getLines())
+console.log(t.getLines())
+console.log(t)
 
-console.log(t.getLines());
-console.log(t.getPoints());
-console.log(t.getPerimeter());
+var p4 = new Point(0, 0);
+var p5 = new Point(460, 120);
+var p6 = new Point(320, 100);
+var s = new Triangle(p4,p5,p6);
+s.draw();
+console.log(s)
+console.log(s.getLines())
