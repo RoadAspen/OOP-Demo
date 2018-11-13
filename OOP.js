@@ -54,7 +54,7 @@ Shape.prototype = { // 原型属性
 		}
 		var lines = [];
 		for (var i = 0; i < this.points.length; i++) {
-			lines[i] = new Lines(this.points[i], (this.points[i + 1]) ? this.points[i + 1] : this.points[0])
+			lines[i] = new Line(this.points[i], (this.points[i + 1]) ? this.points[i + 1] : this.points[0])
 		}
 
 		this.lines = lines;
@@ -64,7 +64,7 @@ Shape.prototype = { // 原型属性
 	getPerimeter: function () {  //获取周长
 		var lines = this.getLines();
 		var perim = 0;
-		for (var i = 0; i < Lines.length; i++) {
+		for (var i = 0; i < lines.length; i++) {
 			perim += lines[i].length
 		}
 
